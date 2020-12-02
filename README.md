@@ -2,22 +2,22 @@
 
 ## users テーブル
 
-| Column           | Type       | Options                       |
-| ---------------- | ---------- | ----------------------------- |
-| nickname         | string     | null: false                   |
-| email            | string     | null: false                   |
-| password         | string     | null: false                   |
-| last_name        | string     | null: false                   |
-| first_name       | string     | null: false                   |
-| last_name(kana)  | string     | null: false                   |
-| first_name(kana) | string     | null: false                   |
-| birthday         | integer    | null: false                   |
+| Column             | Type       | Options                       |
+| ------------------ | ---------- | ----------------------------- |
+| nickname           | string     | null: false                   |
+| email              | string     | null: false unique: true      |
+| encrypted_password | string     | null: false                   |
+| last_name          | string     | null: false                   |
+| first_name         | string     | null: false                   |
+| last_name(kana)    | string     | null: false                   |
+| first_name(kana)   | string     | null: false                   |
+| birthday           | date       | null: false                   |
 
 
 ### Association
 
 - has_many   :items
-- belongs_to : deliveries
+- has_many   ;user_items
 
 
 
@@ -39,12 +39,28 @@
 ### Association
 
 - belongs_to :users
-- has_one    :deliveries
+- has_one    :user_items
 - 
 
 
 
-## deliveries テーブル
+## user_items テーブル
+
+| Column           | Type       | Options                       |
+| ---------------- | ---------- | ----------------------------- |
+| user_id          | references | null: false foreign_key: true |
+| item_id          | references | null: false foreign_key: true |
+
+
+### Association
+
+- belongs_to :users
+- belongs_to :items
+
+
+
+<!-- 
+## address テーブル
 
 | Column           | Type       | Options                       |
 | ---------------- | ---------- | ----------------------------- |
@@ -54,13 +70,11 @@
 | address          | string     | null: false                   |
 | building         | string     | null: false                   |
 | tel_num          | integer    | null: false                   |
-| user_id          | references | null: false foreign_key: true |
-| item_id          | references | null: false foreign_key: true |
 
 ### Association
 
 - belongs_to :users
-- belongs_to :items
+-  -->
 
 
 
