@@ -17,7 +17,7 @@
 ### Association
 
 - has_many   :items
-- has_many   ;user_items
+- has_many   :user_items
 
 
 
@@ -27,19 +27,19 @@
 | ---------------- | ---------- | ----------------------------- |
 | item_name        | string     | null: false                   |
 | explanation      | text       | null: false                   |
-| category         | string     | null: false                   |
-| status           | string     | null: false                   |
-| delivery_fee     | string     | null: false                   |
-| shipper          | string     | null: false                   |
-| delivery_day     | string     | null: false                   |
+| category_id      | integer    | null: false                   |
+| status_id        | integer    | null: false                   |
+| delivery_fee_id  | integer    | null: false                   |
+| shipper_id       | integer    | null: false                   |
+| delivery_day_id  | integer    | null: false                   |
 | price            | integer    | null: false                   |
 | user_id          | references | null: false foreign_key: true |
 
 
 ### Association
 
-- belongs_to :users
-- has_one    :user_items
+- belongs_to :user
+- has_one    :user_item
 - 
 
 
@@ -54,8 +54,8 @@
 
 ### Association
 
-- belongs_to :users
-- belongs_to :items
+- belongs_to :user
+- belongs_to :item
 
 
 
