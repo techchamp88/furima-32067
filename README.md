@@ -25,7 +25,7 @@
 
 | Column           | Type       | Options                       |
 | ---------------- | ---------- | ----------------------------- |
-| item_name        | string     | null: false                   |
+| name             | string     | null: false                   |
 | explanation      | text       | null: false                   |
 | category_id      | integer    | null: false                   |
 | status_id        | integer    | null: false                   |
@@ -65,15 +65,16 @@
 | Column           | Type       | Options                       |
 | ---------------- | ---------- | ----------------------------- |
 | post_code        | string     | null: false                   |
-| prefecture       | string     | null: false                   |
+| prefecture_id    | integer    | null: false                   |
 | city             | string     | null: false                   |
 | address          | string     | null: false                   |
 | building         | string     |                               |
-| tel_num          | integer    | null: false                   |
+| tel_num          | string     | null: false                   |
+| user_items_id    | references | null: false foreign_key: true |
 
 ### Association
 
-- belongs_to :user
+- belongs_to :user_items
 -  
 
 
