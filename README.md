@@ -33,7 +33,7 @@
 | shipper_id       | integer    | null: false                   |
 | delivery_day_id  | integer    | null: false                   |
 | price            | integer    | null: false                   |
-| user_id          | references | null: false foreign_key: true |
+| user             | references | null: false foreign_key: true |
 
 
 ### Association
@@ -70,7 +70,7 @@
 | address          | string     | null: false                   |
 | building         | string     |                               |
 | tel_num          | string     | null: false                   |
-| user_items_id    | references | null: false foreign_key: true |
+| user_items       | references | null: false foreign_key: true |
 
 ### Association
 
