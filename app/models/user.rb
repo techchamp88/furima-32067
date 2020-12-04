@@ -5,23 +5,23 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
         #  has_many   :items
         #  has_many   :user_items
-       
-
-         validates :nickname,         presence: true
-
-         VALID_NAME =/\A[ぁ-んァ-ン一-龥]/.freeze
-         validates :last_name,        presence: true, format: { with: VALID_NAME}
-         validates :first_name,       presence: true, format: { with: VALID_NAME}
         
-         VALID_NAME_KATAKANA = /\A[ァ-ヶー－]+\z/.freeze
-         validates :last_name_kana,   presence: true, format: { with: VALID_NAME_KATAKANA}
-         validates :first_name_kana,  presence: true, format: { with: VALID_NAME_KATAKANA}
+        VALID_NAME_KATAKANA = /\A[ァ-ヶー－]+\z/.freeze 
+        VALID_NAME = /\A[ぁ-んァ-ヶ一-龥々]/.freeze
+        VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
+
+        with_options presence: true do
+          validates :nickname
+
+          validates :last_name,         format: { with: VALID_NAME}
+          validates :first_name,        format: { with: VALID_NAME}
+        
+          validates :last_name_kana,    format: { with: VALID_NAME_KATAKANA}
+          validates :first_name_kana,   format: { with: VALID_NAME_KATAKANA}
 
 
-         validates :birthday,         presence: true
+          validates :birthday
 
-
-         VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
-         validates :password, presence: true, length: { minimum: 6, }, format: { with: VALID_PASSWORD_REGEX}
-
+          validates :password, length: { minimum: 6, }, format: { with: VALID_PASSWORD_REGEX}
+        end
 end
