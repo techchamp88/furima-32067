@@ -12,22 +12,32 @@ class Item < ApplicationRecord
   belongs_to :delivery_day
 
 
+  VALID_PRICE = /^[0-9]+$/
 
+  with_options presence: true do
 
-  validates :name,            presence: true
-  validates :explanation,     presence: true
-  validates :category_id,     presence: true
-  validates :status_id,       presence: true
-  validates :delivery_fee_id, presence: true
-  validates :shipper_id,      presence: true
-  validates :delivery_day_id, presence: true
-  validates :price,           presence: true
-  validates :image,           presence: true
+    validates :name            
+    validates :explanation     
+    validates :category_id     
+    validates :status_id       
+    validates :delivery_fee_id 
+    validates :shipper_id      
+    validates :delivery_day_id 
+    validates :price           
+    validates :image                      
 
+  end
 
-  validates :category_id,     numericality: { other_than: 1 } 
-  validates :status_id,       numericality: { other_than: 1 } 
-  validates :delivery_fee_id, numericality: { other_than: 1 } 
-  validates :shipper_id,      numericality: { other_than: 1 } 
-  validates :delivery_day_id, numericality: { other_than: 1 } 
+  with_options numericality: { other_than: 1 } do
+
+    validates :category_id     
+    validates :status_id       
+    validates :delivery_fee_id 
+    validates :shipper_id      
+    validates :delivery_day_id 
+
+  end
+
+  validates_inclusion_of :price, in: 300..9999999
+
 end
