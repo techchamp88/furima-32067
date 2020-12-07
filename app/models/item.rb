@@ -21,7 +21,6 @@ class Item < ApplicationRecord
   validates :shipper_id,      presence: true
   validates :delivery_day_id, presence: true
   validates :price,           presence: true
-  validates :name,            presence: true
   validates :image,           presence: true
 
 
