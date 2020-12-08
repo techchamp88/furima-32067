@@ -15,11 +15,7 @@ RSpec.describe Item, type: :model do
         @item.price = 400
         expect(@item).to be_valid
       end
-
-
-
     end
-
 
     context '商品出品機能がうまくいかないとき' do
       it "nameが無い時" do
@@ -114,9 +110,16 @@ RSpec.describe Item, type: :model do
       it "priceが半角数字で無い" do
         @item.price = "３０００"
         @item.valid?
-        binding.pry
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
+
+      it "imageが無い時" do
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
+
+
     end
   end
 end
