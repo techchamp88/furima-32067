@@ -110,8 +110,13 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
-      
 
+      it "priceが半角数字で無い" do
+        @item.price = "３０００"
+        @item.valid?
+        binding.pry
+        expect(@item.errors.full_messages).to include("Price is not included in the list")
+      end
     end
   end
 end

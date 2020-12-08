@@ -12,7 +12,7 @@ class Item < ApplicationRecord
   belongs_to :delivery_day
 
 
-  VALID_PRICE = /\A^[0-9]+$\z/
+  VALID_PRICE = /\A[0-9]+\z/.freeze
 
   with_options presence: true do
 
