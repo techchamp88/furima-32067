@@ -16,21 +16,6 @@ RSpec.describe Item, type: :model do
         expect(@item).to be_valid
       end
 
-      it "必要な情報を適切に入力すると、商品の出品ができること" do
-        expect(@item).to be_valid
-      end
-
-      it "エラーハンドリングができていること" do
-        expect(@item).to be_valid
-      end
-
-      it "入力された販売価格によって、販売手数料や販売利益の表示が変わること" do
-        expect(@item).to be_valid
-      end
-
-      it "入力に問題がある状態で出品ボタンが押されたら、出品ページに戻りエラーメッセージが表示されること" do
-        expect(@item).to be_valid
-      end
 
 
     end

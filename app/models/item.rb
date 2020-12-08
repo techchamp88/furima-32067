@@ -12,7 +12,7 @@ class Item < ApplicationRecord
   belongs_to :delivery_day
 
 
-  VALID_PRICE = /^[0-9]+$/
+  VALID_PRICE = /\A^[0-9]+$\z/
 
   with_options presence: true do
 
@@ -23,7 +23,7 @@ class Item < ApplicationRecord
     validates :delivery_fee_id 
     validates :shipper_id      
     validates :delivery_day_id 
-    validates :price           
+    validates :price,           format: { with: VALID_PRICE }
     validates :image                      
 
   end
