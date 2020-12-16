@@ -1,7 +1,10 @@
 class UserItemsController < ApplicationController
-  def new
+  def index
+    @pay = Pay.new
   end
 
+
   def create
+
   end
 end
