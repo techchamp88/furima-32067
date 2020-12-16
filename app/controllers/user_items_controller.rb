@@ -3,13 +3,18 @@ class UserItemsController < ApplicationController
     @pay = Pay.new
     @item = Item.find(params[:item_id])
   end
-
-
+  
+  
   def create
     @pay = Pay.new(pay_params)
-    @pay.valid?
-    @pay.save
-    redirect_to root_path
+    @item = Item.find(params[:item_id])
+    
+    if @pay.valid?
+      @pay.save
+      redirect_to root_path
+    else
+      render :index
+    end
   end
 
   private
