@@ -65,7 +65,7 @@
 | Column           | Type       | Options                       |
 | ---------------- | ---------- | ----------------------------- |
 | post_code        | string     | null: false                   |
-| prefecture_id    | integer    | null: false                   |
+| shipper_id    | integer    | null: false                   |
 | city             | string     | null: false                   |
 | address          | string     | null: false                   |
 | building         | string     |                               |
@@ -96,3 +96,6 @@
 
 - belongs_to :user
 - belongs_to :item
+
+
+ALTER TABLE address CHANGE prefecture_id shipper_id integer;  
