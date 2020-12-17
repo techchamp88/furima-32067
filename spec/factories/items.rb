@@ -4,7 +4,7 @@ FactoryBot.define do
     name                     {"猫"}
     explanation              {"あああ"}
     category_id              { 2 }
-    status_id                { 2}
+    status_id                { 2 }
     delivery_fee_id          { 2 }
     shipper_id               { 2 }
     delivery_day_id          { 2 }
