@@ -11,6 +11,7 @@ class UserItemsController < ApplicationController
     @item = Item.find(params[:item_id])
     
     if @pay.valid?
+      pay_item
       @pay.save
       redirect_to root_path
     else
@@ -21,8 +22,16 @@ class UserItemsController < ApplicationController
   private
 
   def pay_params
-    params.require(:pay).permit(:post_code, :shipper_id, :city, :address, :building, :tel_num, :card_status, :month, :year, :security).merge(user_id: current_user.id, item_id: params[:item_id])
+    params.require(:pay).permit(:post_code, :shipper_id, :city, :address, :building, :tel_num, :card_status, :month, :year, :security).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
+  def pay_item
+   Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp::Charge.create(
+      amount: @item.price,  
+      card: pay_params[:token],    
+      currency: 'jpy'                 
+    )
+  end
 
 end

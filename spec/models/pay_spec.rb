@@ -52,12 +52,12 @@ RSpec.describe Pay, type: :model do
         expect(@pay.errors.full_messages).to include("Token can't be blank")
       end
 
+      end
       it "shipper_idが1の時" do
         @pay.shipper_id = 1
         @pay.valid?
         expect(@pay.errors.full_messages).to include("Shipper must be other than 1")
       end
-
       it "post_codeにハイフンがない時" do
         @pay.post_code = 1111111
         @pay.valid?

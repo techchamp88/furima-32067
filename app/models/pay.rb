@@ -1,7 +1,7 @@
 class Pay
 
   include ActiveModel::Model
-  attr_accessor :post_code, :shipper_id, :city, :address, :building, :tel_num, :token, :user_id, :item_id, :card_status, :month, :year, :security
+  attr_accessor :post_code, :shipper_id, :city, :address, :building, :tel_num, :token, :user_id, :item_id, :card_status, :month, :year, :security, :token
 
 # ここにバリデーションの処理を書く
 
@@ -12,10 +12,7 @@ class Pay
     validates :address
     validates :tel_num,           format: {with: /\A[0-9]{11}\z/}
 
-
     validates :token
-
-    
   end
 
   def save
