@@ -1,4 +1,5 @@
 class UserItemsController < ApplicationController
+  before_action :authenticate_user!,   only: [:index]
   def index
     @pay = Pay.new
     @item = Item.find(params[:item_id])
