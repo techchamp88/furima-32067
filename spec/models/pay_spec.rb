@@ -10,14 +10,6 @@ RSpec.describe Pay, type: :model do
       it "post_code,shipper_id,city,address,tel_num,tokenが空でないこと" do
         expect(@pay).to be_valid
       end
-      it "post_codeにはハイフンが必要で数字のみ記入してある(123-4567)" do
-        @pay.post_code = "123-4567"
-        expect(@pay).to be_valid
-      end
-      it "電話番号にはハイフンはなく数字のみであり11文字いないである(00000000000)" do
-        @pay.tel_num = 11111111111
-        expect(@pay).to be_valid
-      end
     end
 
     context '商品購入機能がうまくいかない時' do

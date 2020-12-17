@@ -1,9 +1,8 @@
 class UserItemsController < ApplicationController
   before_action :authenticate_user!,   only: [:index]
-
+  before_action :item_find, only: [:index, :create]
 
   def index
-    @item = Item.find(params[:item_id])
    redirect_to root_path if current_user.id == @item.user_id || @item.user_item.present?
     @pay = Pay.new
   end
@@ -11,7 +10,6 @@ class UserItemsController < ApplicationController
   
   def create
     @pay = Pay.new(pay_params)
-    @item = Item.find(params[:item_id])
     
     if @pay.valid?
       pay_item
@@ -23,6 +21,10 @@ class UserItemsController < ApplicationController
   end
 
   private
+  
+  def item_params
+    @item = Item.find(params[:item_id])
+  end
 
   def pay_params
     params.require(:pay).permit(:post_code, :shipper_id, :city, :address, :building, :tel_num, :card_status, :month, :year, :security).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
