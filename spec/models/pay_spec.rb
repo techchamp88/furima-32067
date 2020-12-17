@@ -2,12 +2,19 @@ require 'rails_helper'
 RSpec.describe Pay, type: :model do
   let(:pay) { FactoryBot.create(:pay) }
   before do
-    @pay = FactoryBot.build(:pay)
+    @user1 = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item, user_id: @user1.id)
+    @user2 = FactoryBot.create(:user, email: "test123@example")
+    @pay = FactoryBot.build(:pay, user_id: @user2.id, item_id: @item.id)
   end
 
   describe '購入情報の保存' do
     context '商品購入機能がうまくいくとき' do
-      it "post_code,shipper_id,city,address,tel_num,tokenが空でないこと" do
+      it "全ての情報が記入されていること" do
+        expect(@pay).to be_valid
+      end
+      it "buildingがなくても登録できる" do
+      @pay.building = ""
         expect(@pay).to be_valid
       end
     end
@@ -43,6 +50,17 @@ RSpec.describe Pay, type: :model do
         @pay.valid?
         expect(@pay.errors.full_messages).to include("Token can't be blank")
       end
+      it "user_idの情報がない時" do
+        @pay.user_id = nil
+        @pay.valid?
+        expect(@pay.errors.full_messages).to include("User can't be blank")
+      end
+      it "item_idの情報がない時" do
+        @pay.item_id = nil
+        @pay.valid?
+        expect(@pay.errors.full_messages).to include("Item can't be blank")
+      end
+
 
       it "shipper_idが1の時" do
         @pay.shipper_id = 1
@@ -50,7 +68,7 @@ RSpec.describe Pay, type: :model do
         expect(@pay.errors.full_messages).to include("Shipper must be other than 1")
       end
       it "post_codeにハイフンがない時" do
-        @pay.post_code = 1111111
+        @pay.post_code = "1111111"
         @pay.valid?
         expect(@pay.errors.full_messages).to include("Post code is invalid")
       end
@@ -60,7 +78,7 @@ RSpec.describe Pay, type: :model do
         expect(@pay.errors.full_messages).to include("Post code is invalid")
       end
       it "tel_numにハイフンが入っている時" do
-        @pay.tel_num = 111-1111-1111
+        @pay.tel_num = "111-1111-1111"
         @pay.valid?
         expect(@pay.errors.full_messages).to include("Tel num is invalid")
       end
