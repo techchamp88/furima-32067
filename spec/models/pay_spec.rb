@@ -22,9 +22,9 @@ RSpec.describe Pay, type: :model do
 
     context '商品購入機能がうまくいかない時' do
       it "post_codeの情報がない時" do
-      @pay.post_code = ""
-      @pay.valid?
-      expect(@pay.errors.full_messages).to include("Post code can't be blank")
+        @pay.post_code = ""
+        @pay.valid?
+        expect(@pay.errors.full_messages).to include("Post code can't be blank")
       end
       it "shipper_idの情報がない時" do
         @pay.shipper_id = ""
@@ -52,7 +52,6 @@ RSpec.describe Pay, type: :model do
         expect(@pay.errors.full_messages).to include("Token can't be blank")
       end
 
-      end
       it "shipper_idが1の時" do
         @pay.shipper_id = 1
         @pay.valid?
