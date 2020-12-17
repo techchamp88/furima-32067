@@ -88,7 +88,7 @@ RSpec.describe Pay, type: :model do
         expect(@pay.errors.full_messages).to include("Tel num is invalid")
       end
       it "tel_numが１１文字以上のとき" do
-        @pay.tel_num = 1111111111111
+        @pay.tel_num = "1111111111111"
         @pay.valid?
         expect(@pay.errors.full_messages).to include("Tel num is invalid")
       end
