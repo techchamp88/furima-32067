@@ -3,14 +3,9 @@ class UserItemsController < ApplicationController
 
 
   def index
-    if current_user.id == @item.user_id
-       redirect_to root_path
-    end
-    if @item.user_item.present?
-      redirect_to root_path
-    end
-    @pay = Pay.new
     @item = Item.find(params[:item_id])
+   redirect_to root_path if current_user.id == @item.user_id || @item.user_item.present?
+    @pay = Pay.new
   end
   
   
