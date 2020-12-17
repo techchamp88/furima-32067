@@ -1,6 +1,14 @@
 class UserItemsController < ApplicationController
   before_action :authenticate_user!,   only: [:index]
+
+
   def index
+    if current_user.id == @item.user_id
+       redirect_to root_path
+    end
+    if @item.user_item.present?
+      redirect_to root_path
+    end
     @pay = Pay.new
     @item = Item.find(params[:item_id])
   end
@@ -33,5 +41,7 @@ class UserItemsController < ApplicationController
       currency: 'jpy'                 
     )
   end
+
+
 
 end
